@@ -1,0 +1,8 @@
+<h2><%=@user.name%>さんの詳細ページ</h2>
+<p>名前：<%=@user.name%></p>
+<p>メールアドレス：<%=@user.mail%></p>
+<% if current_user?(@user)%>
+  <%= link_to "編集", "/users/#{@user.id}/edit"%>
+<% end %>
+
+<%#　したに投稿一覧げっと %>

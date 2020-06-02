@@ -1,0 +1,12 @@
+<% if flash[:danger]%>
+  <div>
+    <p class="alert alert-danger"><%= flash[:danger]%></P>
+  </div>
+<% end %>
+<div style="width: 300px" class="mx-auto">
+<%= form_with url: "/users/#{@user.id}/update" do |f| %>
+  <div> <%= f.text_field :name, placeholder: "#{@user.name}" %></div>
+  <div><%=f.text_field :mail , placeholder: "#{@user.mail}"%></div>
+  <div><%= f.submit '更新', class: "btn btn-outline-warning" %></div>
+<% end %>
+</div>

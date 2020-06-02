@@ -1,0 +1,29 @@
+<div class="mx-auto w-90 row">
+<% if flash[:success]%>
+  <div>
+    <p class="alert alert-success"><%= flash[:success]%></P>
+  </div>
+<% end %>
+
+<% if !@tasks_show.present? %>
+  <div class="alert alert-success">
+    DONE!! Do you have more tasks?
+  </div>
+<% end %>
+  <% @tasks_show.each do |t| %>
+  <div class="col-12">
+  <div class="card">
+    <div class="card-body">
+        <h5 class="card-title"><%=t.task%></h5>
+        <p style='color:<%= is_deadline_over?(t.limit_date) %>' class ="card-text">by<%=t.limit_date.strftime("%y/%m/%d")%></p>
+        <p class="card-text">優先度<%=t.priority%></p>
+        <div class="d-flex justify-content-end">
+          <%= link_to "編集" , edit_task_path(t) ,class: 'btn btn-outline-primary mr-2'%>
+          <%= button_to '完了！', task_path(t), {method: :delete , class: 'btn btn-outline-success'}%>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+

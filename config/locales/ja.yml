@@ -1,0 +1,9 @@
+ja:
+  activerecord:
+    models:
+      task: todo
+    attributes:
+      task:
+        task: タスク
+        limit_date: 期限
+        priority: 優先順位

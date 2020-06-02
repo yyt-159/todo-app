@@ -1,0 +1,20 @@
+<div style="width:400px" class="mx-auto">
+  <h1>ユーザー一覧です</h1>
+  <% @user.each do |user| %>
+  <div class="d-flex">
+    <p><%=link_to "#{user.name}","/users/#{user.id}/show"%></p>
+<% 
+=begin
+    %>
+
+<% if @current_user.admin?%>
+    <p><%= button_to "削除", "/users/#{user.id}/destroy", { method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-outline-danger" } %></p>
+  
+      <% end %><%# 管理者確認終わり %>
+
+<%
+=end
+%>   
+  </div>
+  <% end %><%# each end %>
+</div>

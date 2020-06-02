@@ -1,0 +1,15 @@
+<% if flash[:danger]%>
+  <div>
+    <p class="alert alert-danger"><%= flash[:danger]%></P>
+  </div>
+<% end %>
+<div style="width :300px" class="mx-auto">
+<h2>アカウント作成</h2>
+<%= form_with url: users_new_path do |f| %>
+<div><%= f.text_field :name, placeholder: "お名前" %>  <%# 名前の入力エリア%></div>
+<div><%=f.text_field :mail , placeholder: "メールアドレス"%></div>
+<div><%=f.text_field :password , placeholder: "パスワード"%></div>
+<div> <%=f.text_field :password_confirmation, placeholder: "パスワードもう一度"%></div>
+<div><%= f.submit '登録', class: "btn btn-outline-warning" %></div>
+<% end %>
+</div>

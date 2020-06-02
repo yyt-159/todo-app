@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TodoApp</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+     <%#= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+   <div class="d-flex row"><%# -- whole START -- %>
+    <div class="col-md-3"><%# -- header part START -- %>
+      <div class="ml-5 pl-5 mt-5 pt-5"><%# 余白 %>
+        <div><img class="logo" src="/assets/logo.png" alt="ロゴ"></div>
+        <ul class="nav flex-column">
+          <% if @current_user %>
+            <% if @current_user.admin? %>
+              <li class="nav-item">
+                <%=link_to "ユーザー一覧","/users/index", class: 'text-info'%>
+              </li>
+            <% end %><%# @current_user.admin? END %>
+              <li class="nav-item mt-4">
+                <%= link_to "ログイン中のユーザーid:#{@current_user.id}" ,"/users/#{@current_user.id}/show" , class: 'text-info'%>
+              </li>
+              <li class="nav-item mt-4">
+                <%= button_to "ログアウト" ,  logout_path ,class: 'btn btn-outline-info' ,method: :delete  %>
+              </li>
+            <% else %><%# -- if @current_user true END -- %>
+              <li class="nav-item">
+                <%= link_to "ログイン" , login_path ,class: 'btn btn-outline-info' %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "アカウント作成" ,  users_new_path ,class: 'btn btn-outline-info' %>
+              </li>
+          <% end %><%# -- if @current_user false END -- %>
+        </ul>
+      </div><%# 余白終わり %>
+    </div><%# -- header part END -- %>
+  <div class="col-md-9 px-0"><%# -- yield START -- %>
+    <%= yield %>
+  </div><%# -- yield END -- %>
+  </div><%# -- whole END -- %>
+  </body>
+</html>
+
+
+

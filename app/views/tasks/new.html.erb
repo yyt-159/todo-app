@@ -1,0 +1,12 @@
+<div class="mt-3 d-flex"><%# タスク入力エリア %>
+      
+        <%= form_for(@task) do |f| %>
+         <%= render 'layouts/error_messages', model: f.object %>
+        <%= f.text_field :task, placeholder: "新規タスク" %>  <%# title（タスク）の入力エリア%>
+        <%=f.date_select :limit_date, {discard_year: true} %>まで
+        <%=f.number_field :priority%>
+        <%= f.check_box :public ,{checked: true}, "true", "false" %>公開しますか？
+        <%= f.submit '追加', class: "btn btn-outline-warning" %>
+        <% end %>
+        
+  </div>
