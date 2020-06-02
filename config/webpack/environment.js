@@ -6,4 +6,5 @@ environment.plugins.prepend('Provide',
         jQuery: 'jquery/src/jquery'
     })
 )
+environment.loaders.delete('nodeModules');//英語のサイトのやつ
 module.exports = environment
