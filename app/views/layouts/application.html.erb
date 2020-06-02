@@ -25,13 +25,16 @@
                 <%= link_to "ログイン中のユーザーid:#{@current_user.id}" ,"/users/#{@current_user.id}/show" , class: 'text-info'%>
               </li>
               <li class="nav-item mt-4">
+                  <%=link_to "投稿一覧",tasks_path, class: 'text-info'%>
+              </li>
+              <li class="nav-item mt-4">
                 <%= button_to "ログアウト" ,  logout_path ,class: 'btn btn-outline-info' ,method: :delete  %>
               </li>
             <% else %><%# -- if @current_user true END -- %>
-              <li class="nav-item">
+              <li class="nav-item mt-3">
                 <%= link_to "ログイン" , login_path ,class: 'btn btn-outline-info' %>
               </li>
-              <li class="nav-item">
+              <li class="nav-item mt-3">
                 <%= link_to "アカウント作成" ,  users_new_path ,class: 'btn btn-outline-info' %>
               </li>
           <% end %><%# -- if @current_user false END -- %>
