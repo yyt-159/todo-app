@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_01_095426) do
+ActiveRecord::Schema.define(version: 2020_06_03_023801) do
 
   create_table "tasks", force: :cascade do |t|
     t.text "task"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2020_06_01_095426) do
     t.integer "priority"
     t.integer "user_id"
     t.boolean "public", null: false
+    t.integer "notice_id"
   end
 
   create_table "users", force: :cascade do |t|

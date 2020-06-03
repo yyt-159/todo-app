@@ -41,6 +41,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     total_count_and_twi(@task)
+    notice_check(@task)
     redirect_to tasks_url
   end
 
@@ -81,8 +82,18 @@ class TasksController < ApplicationController
         count += 1 if task.limit_date < Date.today
       end
       if count > 1
-        notice = Task.new(task: "#{@current_user.name}さんが累計#{count}件のタスクを先延ばししています。早くやれ！！！", public: "true")
+        notice = Task.new(task: "#{@current_user.name}さんが累計#{count}件のタスクを先延ばししています。早くやれ！！！", public: "true", notice_id:"#{@current_user.id}")
         notice.save
       end
+     end
+
+     def notice_check(task)
+       #destroy時に発火させる
+       if task.limit_date < Date.today  #消したのが超過してるか確認する
+         notice = Task.where(notice_id:"#{@current_user.id}") #  タスクからnotice_idで今のユーザーのnotice引っ張ってくる
+         notice.destroy # 上を消す
+       end
+      #  この文じゃなくて、indexにリダイレクトした時に、もう一度punishmentが動いて最新の
+      #  超過情報がタイムライに乗る
      end
 end
