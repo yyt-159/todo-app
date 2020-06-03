@@ -80,7 +80,7 @@ class TasksController < ApplicationController
       @user_tasks.each do |task|
         count += 1 if task.limit_date < Date.today
       end
-      if count < 1
+      if count > 1
         notice = Task.new(task: "#{@current_user.name}さんが累計#{count}件のタスクを先延ばししています。早くやれ！！！", public: "true")
         notice.save
       end
