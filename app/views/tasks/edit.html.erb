@@ -3,7 +3,7 @@
   <%= form_for(@task) do |f| %>
     <div><%= f.text_field :task %></div>
     <div><%=f.date_select :limit_date, {discard_year: true} %></div>
-    <div><%=f.number_field :priority%></div>
+    <div>優先度<%=f.number_field :priority, min: 1%></div>
     <div><%= f.submit '完了', class: "btn btn-outline-warning" %></div>
   <% end %>
   <%= link_to '戻る', tasks_path %>

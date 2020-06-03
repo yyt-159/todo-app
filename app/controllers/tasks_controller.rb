@@ -7,7 +7,7 @@ class TasksController < ApplicationController
 
   def index
       punishment
-      @tasks = Task.where(public:"true")
+      @tasks = Task.where(public:"true").reverse_order
   end
 
   def new
@@ -81,7 +81,7 @@ class TasksController < ApplicationController
       @user_tasks.each do |task|
         count += 1 if task.limit_date < Date.today
       end
-      if count > 1
+      if count > 0
         notice = Task.new(task: "#{@current_user.name}さんが累計#{count}件のタスクを先延ばししています。早くやれ！！！", public: "true", notice_id:"#{@current_user.id}")
         notice.save
       end

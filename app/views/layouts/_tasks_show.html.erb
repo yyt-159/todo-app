@@ -7,11 +7,12 @@
 
 <% if !@tasks_show.present? %>
   <div class="alert alert-success">
-    DONE!! Do you have more tasks?
+    Do you have more tasks?
   </div>
 <% end %>
+  <div id="self-tasks">
   <% @tasks_show.each do |t| %>
-  <div class="col-12">
+  <div class="col-12" id ="task-<%=t.id%>">
   <div class="card">
     <div class="card-body">
         <h5 class="card-title"><%=t.task%></h5>
@@ -19,11 +20,12 @@
         <p class="card-text">優先度<%=t.priority%></p>
         <div class="d-flex justify-content-end">
           <%= link_to "編集" , edit_task_path(t) ,class: 'btn btn-outline-primary mr-2'%>
-          <%= button_to '完了！', task_path(t), {method: :delete , class: 'btn btn-outline-success'}%>
+          <%= button_to '完了！', task_path(t), {method: :delete , class: 'btn btn-outline-success', confirm: '削除しますか?', remote: true }%>
           </div>
         </div>
       </div>
     </div>
-  <% end %>
+  <% end %><%# each end %>
+  </div><%# self-tasks end %>
 </div>
 
