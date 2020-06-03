@@ -78,11 +78,11 @@ class TasksController < ApplicationController
       @user_tasks = Task.where(user_id: @current_user.id)
       count = 0
       @user_tasks.each do |task|
-      if task.limit_date < Date.today
-        count += 1
-        notice = Task.new(task: "#{@current_user.name}さんが累計#{count}件のタスクを先延ばししています。早くやれ！！！", public: "true")
-        notice.save
+        if task.limit_date < Date.today
+          count += 1
+        end
       end
-      end
-  end
+      notice = Task.new(task: "#{@current_user.name}さんが累計#{count}件のタスクを先延ばししています。早くやれ！！！", public: "true")
+      notice.save
+     end
 end
