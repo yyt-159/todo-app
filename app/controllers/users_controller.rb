@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
 
-  skip_before_action :require_sign_in!, only: [:new, :create]#ログイン確認無視
-  before_action :admin_user, only: [:destroy ,:index]
+  skip_before_action :require_sign_in!, only: [:new, :create,]#ログイン確認無視
+  before_action :admin_user, only: [:destroy]
   before_action :set_user, only: [:destroy, :show, :edit, :update]#セット系
 
-  def index#ユーザー一覧（管理者権限でしか見られない）
-    @user = User.all
+  def index#ユーザー一覧
+    @users = User.all
   end
 
   def show
@@ -46,6 +46,20 @@ class UsersController < ApplicationController
     @user.destroy
     flash[:success] = "削除しました"
     redirect_to users_index_path
+  end
+
+  def following
+    @title = "Following"
+    @user  = User.find(params[:id])
+    @users = @user.following
+    render 'show_follow'
+  end
+
+  def followers
+    @title = "Followers"
+    @user  = User.find(params[:id])
+    @users = @user.followers
+    render 'show_follow'
   end
 
   private

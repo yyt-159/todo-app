@@ -1,6 +1,6 @@
 <div style="width:400px" class="mx-auto">
   <h1>ユーザー一覧です</h1>
-  <% @user.each do |user| %>
+  <% @users.each do |user| %>
   <div class="d-flex">
     <p><%=link_to "#{user.name}","/users/#{user.id}/show"%></p>
 <% 

@@ -15,17 +15,22 @@
         <div><img class="logo" src="/assets/logo.png" alt="ロゴ"></div>
         <ul class="nav flex-column">
           <% if @current_user %>
-            <% if @current_user.admin? %>
+            <%# if @current_user.admin? %>
               <li class="nav-item">
                 <%=link_to "ユーザー一覧","/users/index", class: 'text-info'%>
               </li>
-            <% end %><%# @current_user.admin? END %>
+            <%# end %><%# @current_user.admin? END %>
               <li class="nav-item mt-4">
                 <%= link_to "ログイン中のユーザーid:#{@current_user.id}" ,"/users/#{@current_user.id}/show" , class: 'text-info'%>
               </li>
               <li class="nav-item mt-4">
                   <%=link_to "投稿一覧",tasks_path, class: 'text-info'%>
               </li>
+               <li class="nav-item mt-4 stats">
+
+                  <%= render 'layouts/current_user_stats' %><%#こっちは今のユーザーの  %>
+                </li>
+              
               <li class="nav-item mt-4">
                 <%= button_to "ログアウト" ,  logout_path ,class: 'btn btn-outline-info' ,method: :delete  %>
               </li>
