@@ -1,19 +1,17 @@
-<% if @tasks == nil %>
-  <p>最近の投稿はありません</p>
-  <% else %>
-
+<% if @tasks %>
   <% @tasks.each do |task| %>
     <div class="col-12">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title"><%= task.task %></h5>
-        <p class="card-text"><%= who_is_this?(task.user_id) %></p>
+        <p class="card-text"><%= link_to "#{who_is_this?(task.user_id)}", "users/#{task.user_id}/show" %></p>
         <% if task.limit_date %>
          <p class="card-text"><%= task.limit_date.strftime("%y/%m/%d") %>まで</p>
        <% end %>
       </div>
+      </div>
     </div>
-  </div>
-<% end %>
-
+  <% end %>
+<% else %>
+   <p>最近の投稿はありません</p>
 <% end %>

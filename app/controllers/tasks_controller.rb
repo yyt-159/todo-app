@@ -6,8 +6,18 @@ class TasksController < ApplicationController
 
 
   def index
-      punishment
-      @tasks = Task.where(public:"true").reverse_order
+      punishment  # 罰の投稿を作成する
+    
+      @tasks = Task.where(user_id:@current_user.following_ids).where(public:"true").or(Task.where(user_id: "#{@current_user.id}"))# タスクにパブリックとフォローしてる人のタスクを代入
+
+       # 罰の投稿も追加 
+      task_all = Task.all
+      task_all.each do |task|
+        has_task = User.find_by(id:task.notice_id)
+        if task.notice_id.to_i > 0 && @current_user.following?(has_task)
+          @tasks += [task]
+        end
+      end
   end
 
   def new

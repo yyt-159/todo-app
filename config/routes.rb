@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get 'users/:id/edit', to: 'users#edit'
   post 'users/:id/update', to: 'users#update'
   delete 'users/:id/destroy', to: 'users#destroy'
-  get 'users/:id/show', to:'users#show' 
+  get 'users/:id/show', to:'users#show'
 
   root 'home#index'
 
