@@ -1,15 +1,25 @@
-<div class="stats">
-  <a href="<%= following_user_path(@user) %>">
+<div class="stats d-flex mb-2">
+  <div class="pr-2">
+    <p class="text-center font-weight-bold">
+    <% if @user.done_total == nil %>
+       0
+    <% else %>
+      <%= @user.done_total %>
+    <% end %>
+    </p>
+    <p>完了</p>
+  </div>
+  <a href="<%= following_user_path(@user) %>" class="pr-2">
     <strong id="following" class="stat">
-      <%= @user.following.count %>
+    <p class="text-center font-weight-bold"><%= @user.following.count %></p>
     </strong>
-    フォロー
+    <p>フォロー中</p>
   </a>
   <a href="<%= followers_user_path(@user) %>">
     <strong id="followers" class="stat">
-      <%= @user.followers.count %>
+      <p class="text-center font-weight-bold"> <%= @user.followers.count %></p>
     </strong>
-    フォロワー
+    <p>フォロワー</p> 
   </a>
 </div>
 

@@ -1,9 +1,21 @@
-<div class="row d-flex">
-  <div class="col-8 vh-100"><%=render 'layouts/show'%></div><%#投稿%>
-  <div class="col-4"><%# その他 %>
-    <div class="overflow vh-60"><%=render 'layouts/tasks_show'%></div>
-    <div class="vh-40"><%=render 'layouts/form'%></div>
+<div class="row main1">
+<div class="col-12">
+<% if flash[:success]%>
+    <p class="alert alert-success"><%= flash[:success]%></P>
+<% end %>
+</div>
+
+<div class="col-12">
+  <p class="m-2">みんなのTODO</p>
+<div>
+    <%=render 'layouts/show'%>
   </div>
+</div><%#投稿%>
+
+<div class="col-12"><%# その他 %>
+    <div class="pc"><%=render 'layouts/tasks_show'%></div>
+    <div><%=render 'layouts/form'%></div>
+</div>
 </div>
 
 

@@ -1,21 +1,21 @@
 class TasksController < ApplicationController
   #全てセット系
-  before_action :set_task_show, only: [:index, :create]
+  before_action :set_task_show, only: [:index, :create, :show]
   before_action :set_task, only: [:edit, :update, :destroy]
   before_action :set_task_new, only: [:index, :new]
 
 
   def index
       punishment  # 罰の投稿を作成する
-    
       @tasks = Task.where(user_id:@current_user.following_ids).where(public:"true").or(Task.where(user_id: "#{@current_user.id}"))# タスクにパブリックとフォローしてる人のタスクを代入
-
        # 罰の投稿も追加 
       task_all = Task.all
       task_all.each do |task|
         has_task = User.find_by(id:task.notice_id)
         if task.notice_id.to_i > 0 && @current_user.following?(has_task)
-          @tasks += [task]
+          @tasks += [task]  
+        elsif task.notice_id == @current_user.id
+          @tasks += [task]    
         end
       end
   end
@@ -52,7 +52,7 @@ class TasksController < ApplicationController
     @task.destroy
     total_count_and_twi(@task)
     notice_check(@task)
-    redirect_to tasks_path
+    redirect_to "/users/#{@task.user_id}/show"
   end
 
 

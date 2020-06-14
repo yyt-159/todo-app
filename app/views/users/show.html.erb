@@ -1,12 +1,29 @@
-<h2><%=@user.name%>さんの詳細ページ</h2>
-<p>名前：<%=@user.name%></p>
-<p>メールアドレス：<%=@user.mail%></p>
-<% if current_user?(@user)%>
-  <%= link_to "編集", "/users/#{@user.id}/edit"%>
-<% end %>
-<%#　したに投稿一覧げっと %>
-
- <section class="stats">
+<div class="userShow1 pt-3 col-12">
+<div class="d-flex justify-content-between">
+  <p class="text-center font-weight-bold pl-4 py-2"><%=@user.name%></p>
+  <% if current_user?(@user)%>
+    <p><%= link_to "/users/#{@user.id}/edit" do %>
+      <i class="far fa-edit fa-fw pt-3"></i>
+    <% end %></p>
+  <% end %>
+  <section class="stats">
       <%= render 'layouts/stats' %>
   </section>
-    <%= render 'follow_form'  %>
+</div>
+  <% if current_user?(@user)%>
+    <p class="mb-2">メールアドレス：<%=@user.mail%><br>(メールアドレスは本人にしか公開されません)</p>
+  <% end %>
+</div><%# userShow1 end  %>
+
+  <%= render 'follow_form'  %>
+
+<% if current_user?(@user) %>
+    <div><%= render 'layouts/tasks_show' %></div>
+<% else %>
+    <div><%= render 'layouts/show' %></div>
+<% end %>
+<div class="col-12 mt-3">
+<% if current_user?(@user)%>
+    <%= button_to "ログアウト" ,  logout_path ,class: 'btn btn-danger' ,method: :delete , data: { confirm: '本当にログアウトしますか?' } %>
+<% end %>
+</div>

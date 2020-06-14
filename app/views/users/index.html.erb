@@ -1,20 +1,36 @@
-<div style="width:400px" class="mx-auto">
+<div class="col-12 mt-3">
   <h1>ユーザー一覧です</h1>
   <% @users.each do |user| %>
-  <div class="d-flex">
-    <p><%=link_to "#{user.name}","/users/#{user.id}/show"%></p>
-<% 
-=begin
-    %>
-
-<% if @current_user.admin?%>
-    <p><%= button_to "削除", "/users/#{user.id}/destroy", { method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-outline-danger" } %></p>
-  
-      <% end %><%# 管理者確認終わり %>
-
-<%
-=end
-%>   
-  </div>
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%=link_to "#{user.name}さん","/users/#{user.id}/show"%></h5>
+      <div class="card-color d-flex justify-content-end">
+        <div class="pr-2">
+          <p class="text-center font-weight-bold">
+          <% if user.done_total == nil %>
+            0
+          <% else %>
+            <%= user.done_total %>
+          <% end %>
+          </p>
+          <p>完了</p>
+        </div>
+        <a href="<%= following_user_path(user) %>" class="pr-2">
+        <strong id="following" class="stat">
+          <p class="text-center font-weight-bold"><%= user.following.count %></p>
+        </strong>
+        <p>フォロー中</p>
+        </a>
+        <a href="<%= followers_user_path(user) %>">
+          <strong id="followers" class="stat">
+            <p class="text-center font-weight-bold"> <%= user.followers.count %></p>
+          </strong>
+          <p>フォロワー</p> 
+        </a>
+      </div><%#card-color%>
+      </div><%#card-body%>
+      </div><%#card%>
+    </div><%#col-12%>
   <% end %><%# each end %>
 </div>

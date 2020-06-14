@@ -1,10 +1,14 @@
-<div class="d-flex"><%# タスク入力エリア %>   
-  <%= form_with model:@task do |f| %>
-    <div><%= render 'layouts/error_messages', model: f.object %></div>
-    <div><%= f.text_field :task, placeholder: "新規タスク" %></div>
-    <div><%=f.date_select :limit_date%>まで</div>
-    <div>優先度<%=f.number_field :priority, min: 1%></div>
-    <div><%= f.check_box :public ,{checked: true}, "true", "false" %>公開しますか？</div>
-    <div><%= f.submit '追加', class: "btn btn-outline-warning" %></div>   
+<div class="d-flex col-12 mt-3"><%# タスク入力エリア %>   
+  <%= form_with model:@task ,class:'col-12' do |f| %>
+  <div class="row">
+    <div class="col-12"><%= render 'layouts/error_messages', model: f.object %></div>
+    <div class="col-6"><%= f.text_field :task, placeholder: "新規タスク" %></div>
+    <div class="col-6"><%=f.date_select :limit_date%>まで</div>
+    </div>
+    <div class="row">
+      <div class="col-6">優先度<%=f.number_field :priority, min: 1%></div>
+      <div class="col-6 align-self-end"><%= f.check_box :public ,{checked: true}, "true", "false" %>公開しますか？</div>
+    </div>
+    <div class="mt-2"><%= f.submit '追加', class: "btn btn-outline-primary w-100" %></div>   
   <% end %>
 </div>

@@ -3,15 +3,17 @@
     <div class="col-12">
     <div class="card">
       <div class="card-body">
+      <div class="card-color">
         <h5 class="card-title"><%= task.task %></h5>
-        <p class="card-text"><%= link_to "#{who_is_this?(task.user_id)}", "users/#{task.user_id}/show" %></p>
+        <p class="card-text"><%= link_to_unless_current "#{who_is_this?(task.user_id)}", "/users/#{task.user_id}/show" %></p>
         <% if task.limit_date %>
          <p class="card-text"><%= task.limit_date.strftime("%y/%m/%d") %>まで</p>
        <% end %>
-      </div>
+      </div><%#card-color%>
+      </div><%#card-body%>
       </div>
     </div>
   <% end %>
 <% else %>
-   <p>最近の投稿はありません</p>
+   <p class="text-center">タスクはありません</p>
 <% end %>

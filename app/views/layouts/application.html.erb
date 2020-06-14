@@ -5,50 +5,57 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
   </head>
 
   <body>
-   <div class="d-flex row"><%# -- whole START -- %>
-    <div class="col-md-3"><%# -- header part START -- %>
-      <div class="ml-5 pl-5 mt-5 pt-5"><%# 余白 %>
-        <div><img class="logo" src="/assets/logo.png" alt="ロゴ"></div>
-        <ul class="nav flex-column">
+  <header class="header1">
+    <div class="header1-logo pl-3">
+      <%= link_to tasks_path ,class:'d-flex' do %> 
+        <img class="logo" src="/assets/footer-logo.png" alt="ロゴ">
+        <p class="text-dark ml-2 align-self-center font-weight-bold">HAVE TODO</p>
+      <% end %>
+    </div>
+  </header>
+  <main>
+    <%= yield %>
+  </main>
+
+<footer class="footer1">
+        <ul class="nav">
           <% if @current_user %>
             <%# if @current_user.admin? %>
               <li class="nav-item">
-                <%=link_to "ユーザー一覧","/users/index", class: 'text-info'%>
+                <%=link_to tasks_path do%>
+                  <i class="fas fa-home fa-2x fa-fw pt-2"></i>
+                <% end %>
               </li>
             <%# end %><%# @current_user.admin? END %>
-              <li class="nav-item mt-4">
-                <%= link_to "ログイン中のユーザーid:#{@current_user.id}" ,"/users/#{@current_user.id}/show" , class: 'text-info'%>
+              <li class="nav-item">
+                <%= link_to "/users/#{@current_user.id}/show" do %>
+                <p><%#=@current_user.name %></p>
+                <i class="far fa-address-card fa-2x fa-fw pt-2"></i>
+                <% end %>
               </li>
-              <li class="nav-item mt-4">
-                  <%=link_to "投稿一覧",tasks_path, class: 'text-info'%>
-              </li>
-               <li class="nav-item mt-4 stats">
-
-                  <%= render 'layouts/current_user_stats' %><%#こっちは今のユーザーの  %>
-                </li>
-              
-              <li class="nav-item mt-4">
-                <%= button_to "ログアウト" ,  logout_path ,class: 'btn btn-outline-info' ,method: :delete  %>
+              <li class="nav-item">
+                <%= link_to "/users/index" do %>
+                  <i class="fas fa-users fa-2x fa-fw pt-2"></i>
+                <% end %>
               </li>
             <% else %><%# -- if @current_user true END -- %>
-              <li class="nav-item mt-3">
-                <%= link_to "ログイン" , login_path ,class: 'btn btn-outline-info' %>
+              <li class="nav-item">
+                <%= link_to "ログイン" , login_path ,class: 'btn btn-outline-primary mt-1' %>
               </li>
-              <li class="nav-item mt-3">
-                <%= link_to "アカウント作成" ,  users_new_path ,class: 'btn btn-outline-info' %>
+              <li class="nav-item">
+                <%= link_to "アカウント作成" ,  users_new_path ,class: 'btn btn-outline-primary mt-1' %>
               </li>
           <% end %><%# -- if @current_user false END -- %>
         </ul>
-      </div><%# 余白終わり %>
-    </div><%# -- header part END -- %>
-  <div class="col-md-9 px-0"><%# -- yield START -- %>
-    <%= yield %>
-  </div><%# -- yield END -- %>
-  </div><%# -- whole END -- %>
+</footer>
+   
   </body>
 </html>
 

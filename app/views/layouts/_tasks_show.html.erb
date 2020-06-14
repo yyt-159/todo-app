@@ -1,4 +1,4 @@
-<div class="mx-auto w-90 row">
+<div class="row">
 <% if flash[:success]%>
   <div>
     <p class="alert alert-success"><%= flash[:success]%></P>
@@ -6,21 +6,31 @@
 <% end %>
 
 <% if !@tasks_show.present? %>
-  <div class="alert alert-success">
-    Do you have more tasks?
+  <div class="alert alert-success col-12">
+  <p>Do you have more tasks?</p> 
   </div>
 <% end %>
-  <div id="self-tasks">
+  <div id="self-tasks" class="col-12">
   <% @tasks_show.each do |t| %>
   <div class="col-12" id ="task-<%=t.id%>">
   <div class="card">
     <div class="card-body">
         <h5 class="card-title"><%=t.task%></h5>
         <p style='color:<%= is_deadline_over?(t.limit_date) %>' class ="card-text">by<%=t.limit_date.strftime("%y/%m/%d")%></p>
-        <p class="card-text">優先度<%=t.priority%></p>
-        <div class="d-flex justify-content-end">
-          <%= link_to "編集" , edit_task_path(t) ,class: 'btn btn-outline-primary mr-2'%>
-          <%= button_to '完了！', task_path(t), {method: :delete , class: 'btn btn-outline-success', confirm: '削除しますか?', remote: true }%>
+        <div class="d-flex justify-content-between">
+          <div><p class="card-text">
+            <% if t.priority %>
+              優先度<%=t.priority%>
+            <% end %>
+          </p></div>
+          <div class="d-flex">
+            <%= link_to edit_task_path(t) do %>
+              <i class="far fa-edit fa-fw mr-3"></i>
+            <% end %>
+            <%= link_to task_path(t), method: :delete do %>
+              <i class="fas fa-check fa-fw"></i>
+            <% end %>
+          </div>
           </div>
         </div>
       </div>
