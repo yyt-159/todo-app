@@ -11,7 +11,7 @@ gem 'sqlite3', '~> 1.4', group: :development
 # 本番ではpostgressを使用する
 
 # Use Puma as the app server
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 4.3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
